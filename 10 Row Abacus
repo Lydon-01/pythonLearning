@@ -52,20 +52,38 @@ def print_abacus(value):
     position = 0
     #print (str(length)) + " is the length" # Debugging
     
+    # Fill the rest of the abacus lines not used
+    templength = length
+    while length < 9:
+        print ">>>|00000*****   |"
+        length += 1
+
+    
     # Loop to print 0 * each number in the Input value. New line for each.
     p1= ">>>|"
     p2= "00000*****"
     p3= "|"
     ball= "*"
     while position < length:
+        
+        ## Print the normal line if its zero
+        #print value[position] #Debuggimg
+        if value[position] == "0": 
+            print ">>>|00000*****   |"
+        
         #print str(position) + " is the position" # Debugging
         #print value[position] + " is the number in this position" # Debugging
-        line = "0" * int(value[position]) # The position value in zeros temporarily
-        if len(line) > 5: # Print out the first 5 zeros plus the number of stars in difference
+        
+        ## Print out the first 5 zeros plus the number of stars in difference
+        elif len(line) > 5: 
+            line = "0" * int(value[position]) # The position value in zeros temporarily
             stars = ((len(line) - 5) * ball)
             answer = "00000" + stars + "   " + ((5 - len(stars)) * ball)
             print p1 + answer + p3
-        else: # If the character is less than 5, print out the value in zeros then attach the difference on p2
+            
+        ## If the character is less than 5, print out the value in zeros then attach the difference on p2
+        else: 
+            line = "0" * int(value[position]) # The position value in zeros temporarily
             #print line # Debugging
             #print p2  # Debugging
             #print value + "  value" # Debugging
@@ -80,8 +98,8 @@ def print_abacus(value):
 
 
 ###  TEST CASES
-print "Abacus showing TOO BIG:"
-print_abacus(12345678910)
+print "Abacus showing zero:"
+print_abacus(0)
 #>>>|00000*****   |
 #>>>|00000*****   |
 #>>>|00000*****   |
