@@ -40,7 +40,6 @@
 # 4 STARS: 0 < lines <= 3
 
 def print_abacus(value):
-    
     # Protection against numbers that are too large for an abacus
     if value > 999999999:
         print "Too big!"
@@ -48,31 +47,36 @@ def print_abacus(value):
         return
         
     # Variables for position and length to be used in the loop
-    value = str(value)
+    value = str(value)[::-1]
     length = len(value) # Length is now an INT
     position = 0
-    print (str(length)) + " The Length" # Debugging
+    #print (str(length)) + " is the length" # Debugging
     
     # Loop to print 0 * each number in the Input value. New line for each.
     p1= ">>>|"
-    p2= "00000*****   "
+    p2= "00000*****"
     p3= "|"
     ball= "*"
     while position < length:
-        print str(position) + " The position" # Debugging
-        print value[position] + " The character in that position" # Debugging
+        #print str(position) + " is the position" # Debugging
+        #print value[position] + " is the number in this position" # Debugging
         line = "0" * int(value[position]) # The position value in zeros temporarily
         if len(line) > 5: # Print out the first 5 zeros plus the number of stars in difference
-            answer = "00000" + ((len(line) - 5) * ball)
+            stars = ((len(line) - 5) * ball)
+            answer = "00000" + stars + "   " + ((5 - len(stars)) * ball)
             print p1 + answer + p3
-        else:
-            answer = line + p2[:(13-(2*int(value)))] + (int(value) * " ") + (int(value) * ball) + p3 # This is a mess, needs clarity
+        else: # If the character is less than 5, print out the value in zeros then attach the difference on p2
+            #print line # Debugging
+            #print p2  # Debugging
+            #print value + "  value" # Debugging
+            #print 10-(10-int(value)) # Debugging
+            answer = line + "   " + p2[10-(10-int(value[position]))::]
+            print p1 + answer + p3
         position += 1
     print "============END============="
 
     # Now build in a way for it to fill all 10 lines of the abacus.
-    
-       
+
 
 ###  TEST CASES
 print "Abacus showing TOO BIG:"
@@ -111,27 +115,3 @@ print_abacus(1337)
 #>>>|00000**   ***|
 #>>>|00000**   ***|
 #>>>|000   00*****|
-
-
-
-## Older stuff thats possibly helpful
-def line_pos(v):
-    p1= ">>>|"
-    p2= "00000*****   "
-    p3= "|"
-    ball = "*"
-    print p2[:(13-(2*v))]
-    asr = p1 + p2[:(13-(2*v))] + (v * " ") + (v * ball) + p3
-    if v>5:
-        ball = "0" * (v-5) 
-        asr = p1 + p2[:13-(2*v)] + (v * " ") + (v * ball) + "*****"+ p3
-    return asr
-
-
-print "======================================"
-print "result  " + line_pos(7)
-print "correct >>>|00000**   ***|"
-print "======================================"
-
-def print_abacus(v):
-    return line_pos(v)
