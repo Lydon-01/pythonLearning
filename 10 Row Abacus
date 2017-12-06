@@ -48,7 +48,7 @@ def print_abacus(value):
         
     # Variables for position and length to be used in the loop
     # print str(value) + " value before reversing"
-    value = str(value)[::-1]
+    value = str(value)#[::-1]
     # print value + " value after reversing...if I reveresed"
     length = len(value) # Length is now an INT
     position = 0
