@@ -47,7 +47,9 @@ def print_abacus(value):
     #    return
         
     # Variables for position and length to be used in the loop
+    # print str(value) + " value before reversing"
     value = str(value)[::-1]
+    # print value + " value after reversing...if I reveresed"
     length = len(value) # Length is now an INT
     position = 0
     #print (str(length)) + " is the length" # Debugging
@@ -55,12 +57,12 @@ def print_abacus(value):
     # Fill the rest of the abacus lines not used
     templength = length
     while templength <= 9:
-        print ">>>|00000*****   |"
+        print "|00000*****   |"
         templength += 1
 
     
     # Loop to print 0 * each number in the Input value. New line for each.
-    p1= ">>>|"
+    p1= "|"
     p2= "00000*****"
     p3= "|"
     ball= "*"
@@ -69,7 +71,7 @@ def print_abacus(value):
         ## Print the normal line if its zero
         #print value[position] #Debugging
         if value[position] == "0": 
-            print ">>>|00000*****   |"
+            print "|00000*****   |" + '\n'
         
         #print str(position) + " is the position" # Debugging
         #print value[position] + " is the number in this position" # Debugging
@@ -91,37 +93,37 @@ def print_abacus(value):
 ###  TEST CASES
 print "Abacus showing 0:"
 print_abacus(0)
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
 print "Abacus showing 12345678:"
 print_abacus(12345678)
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000****   *|
-#>>>|00000***   **|
-#>>>|00000**   ***|
-#>>>|00000*   ****|
-#>>>|00000   *****|
-#>>>|0000   0*****|
-#>>>|000   00*****|
-#>>>|00   000*****|
+#|00000*****   |
+#|00000*****   |
+#|00000****   *|
+#|00000***   **|
+#|00000**   ***|
+#|00000*   ****|
+#|00000   *****|
+#|0000   0*****|
+#|000   00*****|
+#|00   000*****|
 print "Abacus showing 1337:"
 print_abacus(1337)
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000*****   |
-#>>>|00000****   *|
-#>>>|00000**   ***|
-#>>>|00000**   ***|
-#>>>|000   00*****|
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000*****   |
+#|00000****   *|
+#|00000**   ***|
+#|00000**   ***|
+#|000   00*****|
