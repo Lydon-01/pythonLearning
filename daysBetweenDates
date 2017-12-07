@@ -1,0 +1,81 @@
+# By Websten from forums
+#
+# Given your birthday and the current date, calculate your age in days. 
+# Account for leap days. 
+#
+# Assume that the birthday and current date are correct dates (and no 
+# time travel). 
+#
+def daysBetweenDates(year1, month1, day1, year2, month2, day2):
+## YEAR STUFF
+    # Return True if it a leap year
+    def was_leap(y):
+        return y % 4 == 0 and (y % 100 != 0 or y % 400 == 0)
+
+    # Days of full years between them
+    def sum_years(y1,y2):
+        year_days = 0
+        y1 = y1 + 1
+        while y1<y2:
+            if was_leap(y1) == True:
+                year_days = year_days + 366
+            else:
+                year_days = year_days + 365
+            y1 = y1 + 1
+        return year_days
+    
+    # How many days total would be in the year from 1 jan till the start of that month and that day
+    def days_passed(y,m,d):
+        month_position = 0
+        m_days = 0
+        if was_leap(y) == True:
+                daysOfMonths = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        else:
+            daysOfMonths = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        while month_position<m:
+            m_days = m_days + daysOfMonths[month_position]
+            month_position = month_position + 1
+        return m_days + d
+        
+    # Days in Year1 after that date
+    def rest_of_y1(y1,m1,d1):
+        y1_days = 365
+        if was_leap(y1) == True:
+            y1_days = 366
+        rest_of_y1  = y1_days - days_passed(y1,m1,d1)
+        return rest_of_y1
+
+## Troubleshooting
+    #print was_leap(year1)
+    #print was_leap(year2)
+    #print days_passed(year1,month1,day1)
+    #print days_passed(year2,month2,day2)
+    #print rest_of_y1(year1,month1,day1,year2)
+    #print sum_years(year1,year2)
+    #print "----------------------------"
+    def answer(year1, month1, day1, year2, month2, day2):
+        if year1 == year2:
+            ans = days_passed(year2,month2,day2) - days_passed(year1,month1,day1)
+        elif year2 == (year1 + 1):
+            ans = rest_of_y1(year1,month1,day1) + days_passed(year2,month2,day2)
+        else: 
+            ans = rest_of_y1(year1,month1,day1) + sum_years(year1,year2) + days_passed(year2,month2,day2)
+        return ans
+    return answer(year1, month1, day1, year2, month2, day2)
+
+
+# Test routine
+def test():
+    test_cases = [((2012,2,1,2013,2,1), 366), 
+                  ((2012,1,1,2012,2,28), 58),
+                  ((2012,1,1,2012,3,1), 60),
+                  ((2011,6,30,2012,6,30), 366),
+                  ((2011,1,1,2012,8,8), 585 ),
+                  ((1900,1,1,1999,12,31), 36523)]
+    for (args, answer) in test_cases:
+        result = daysBetweenDates(*args)
+        if result != answer:
+            print "Test failed: ", args, answer, "Result: ", daysBetweenDates(*args)
+        else:
+            print "Test case passed!"
+test()
