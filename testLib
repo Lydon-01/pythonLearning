@@ -1,0 +1,6 @@
+class Mylib():
+        def __init__(self):
+                self.x = 100
+
+        def getX():
+                return self.x
